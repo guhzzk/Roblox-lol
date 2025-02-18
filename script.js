@@ -25,7 +25,9 @@ function login() {
     const pass = document.getElementById('loginPass').value;
     if (localStorage.getItem(user) === pass) {
         alert('Login bem-sucedido!');
-        closePopup('loginPopup');
+        // Redireciona para a página de produtos
+        window.location.href = "dashboard.html"; // Altere o nome para o arquivo correto
+        document.getElementById('loginPopup').style.display = 'none';
     } else {
         alert('Usuário ou senha incorretos!');
     }
