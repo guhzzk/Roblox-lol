@@ -1,5 +1,15 @@
 function openPopup(id) {
+    // Fecha qualquer popup que esteja aberto
+    document.querySelectorAll('.popup').forEach(function(popup) {
+        popup.style.display = 'none';
+    });
+    
+    // Exibe o pop-up que foi clicado
     document.getElementById(id).style.display = 'block';
+}
+
+function closePopup(id) {
+    document.getElementById(id).style.display = 'none';
 }
 
 function signup() {
@@ -7,7 +17,7 @@ function signup() {
     const pass = document.getElementById('signupPass').value;
     localStorage.setItem(user, pass);
     alert('Conta criada com sucesso!');
-    document.getElementById('signupPopup').style.display = 'none';
+    closePopup('signupPopup');
 }
 
 function login() {
@@ -15,9 +25,8 @@ function login() {
     const pass = document.getElementById('loginPass').value;
     if (localStorage.getItem(user) === pass) {
         alert('Login bem-sucedido!');
-        document.getElementById('loginPopup').style.display = 'none';
+        closePopup('loginPopup');
     } else {
         alert('Usuário ou senha incorretos!');
     }
 }
-
