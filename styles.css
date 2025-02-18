@@ -1,3 +1,4 @@
+
 body {
     text-align: center;
     font-family: Arial, sans-serif;
@@ -8,11 +9,11 @@ body {
 }
 
 .logo {
-    font-size: 60px;
+    font-size: 50px;
     font-weight: bold;
     margin-top: 20%;
-    color: #e60000; /* Vermelho vibrante */
-    text-shadow: 2px 2px 10px rgba(255, 0, 0, 0.7); /* Efeito de sombra */
+    color: #e60000;
+    text-shadow: 2px 2px 10px rgba(255, 0, 0, 0.7);
 }
 
 .buttons {
@@ -25,14 +26,14 @@ body {
     margin: 10px;
     cursor: pointer;
     border: none;
-    background-color: #e60000; /* Botões vermelhos */
+    background-color: #e60000;
     color: white;
     border-radius: 5px;
     transition: background-color 0.3s ease;
 }
 
 .button:hover {
-    background-color: #b30000; /* Cor do botão quando hover */
+    background-color: #b30000;
 }
 
 .popup {
@@ -74,8 +75,82 @@ body {
     background-color: #218838;
 }
 
-.credits {
-    font-size: 12px;
-    margin-top: 50px;
-    color: gray;
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #e60000;
+    color: white;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.menu {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.products {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.product {
+    background-color: #333;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 15px;
+    width: 200px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.product img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.product h3 {
+    margin-top: 10px;
+    color: #e60000;
+}
+
+.product:hover {
+    transform: scale(1.05);
+}
+
+.menuPanel {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #222;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.8);
+    padding: 20px;
+}
+
+.menuItem {
+    margin-bottom: 20px;
+}
+
+.menuItem img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.menuItem h4 {
+    color: #e60000;
+    text-align: center;
+}
+
+.menuPanel.active {
+    display: block;
 }
