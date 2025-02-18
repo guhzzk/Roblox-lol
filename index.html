@@ -2,15 +2,17 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Página Inicial</title>
     <style>
-        body { text-align: center; font-family: Arial, sans-serif; }
+        body { text-align: center; font-family: Arial, sans-serif; margin: 0; padding: 0; }
         .logo { font-size: 50px; font-weight: bold; cursor: pointer; margin-top: 20%; }
+        @media (max-width: 430px) {
+            .logo { font-size: 40px; }
+        }
     </style>
 </head>
 <body>
     <div class="logo" onclick="location.href='login.html'">GUSTAVO</div>
 </body>
 </html>
-
