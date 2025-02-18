@@ -13,18 +13,22 @@
         <button class="button" onclick="openPopup('loginPopup')">Entrar na Conta</button>
     </div>
     
+    <!-- Pop-up Criar Conta -->
     <div id="signupPopup" class="popup">
         <h2>Criar Conta</h2>
         <input type="text" placeholder="Nome de usuário" id="signupUser">
         <input type="password" placeholder="Senha" id="signupPass">
         <button onclick="signup()">Cadastrar</button>
+        <button onclick="closePopup('signupPopup')">Fechar</button>
     </div>
     
+    <!-- Pop-up Entrar Conta -->
     <div id="loginPopup" class="popup">
         <h2>Entrar na Conta</h2>
         <input type="text" placeholder="Nome de usuário" id="loginUser">
         <input type="password" placeholder="Senha" id="loginPass">
         <button onclick="login()">Entrar</button>
+        <button onclick="closePopup('loginPopup')">Fechar</button>
     </div>
     
     <div class="credits">Gustavo N16<br>Eduardo N9</div>
