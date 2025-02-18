@@ -48,3 +48,16 @@
     <script src="dashboard.js"></script>
 </body>
 </html>
+
+function login() {
+    const user = document.getElementById('loginUser').value;
+    const pass = document.getElementById('loginPass').value;
+    if (localStorage.getItem(user) === pass) {
+        alert('Login bem-sucedido!');
+        // Redireciona para a página de produtos
+        window.location.href = "dashboard.html"; // Altere o nome para o arquivo correto
+        document.getElementById('loginPopup').style.display = 'none';
+    } else {
+        alert('Usuário ou senha incorretos!');
+    }
+}
