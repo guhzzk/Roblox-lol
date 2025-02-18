@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Gkz Store - Produtos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Topo com nome da loja e menu -->
+    <header>
+        <div class="logo">Gkz Store</div>
+        <div class="menu" onclick="toggleMenu()">&#9776;</div> <!-- 3 barrinhas -->
+    </header>
+
+    <!-- Lista de produtos -->
+    <div class="products">
+        <div class="product">
+            <img src="produto1.jpg" alt="Produto 1">
+            <h3>Produto 1</h3>
+        </div>
+        <div class="product">
+            <img src="produto2.jpg" alt="Produto 2">
+            <h3>Produto 2</h3>
+        </div>
+        <div class="product">
+            <img src="produto3.jpg" alt="Produto 3">
+            <h3>Produto 3</h3>
+        </div>
+    </div>
+
+    <!-- Menu de configurações (inicialmente escondido) -->
+    <div id="menuPanel" class="menuPanel">
+        <div class="menuItem">
+            <img src="produto1.jpg" alt="Imagem Produto 1">
+            <h4>Nome do Produto 1</h4>
+        </div>
+        <div class="menuItem">
+            <img src="produto2.jpg" alt="Imagem Produto 2">
+            <h4>Nome do Produto 2</h4>
+        </div>
+        <div class="menuItem">
+            <img src="produto3.jpg" alt="Imagem Produto 3">
+            <h4>Nome do Produto 3</h4>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
