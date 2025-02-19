@@ -15,7 +15,7 @@
     
     <!-- Pop-up de Criar Conta -->
     <div id="signupPopup" class="popup">
-        <button class="close-btn" onclick="closePopup('signupPopup')">&#10006;</button>
+        <button class="close-btn" onclick="closePopup('signupPopup')" style="color: red; font-size: 20px;">&#10006;</button>
         <h2>Criar Conta</h2>
         <input type="text" placeholder="Nome de usuário" id="signupUser">
         <input type="password" placeholder="Senha" id="signupPass">
@@ -24,28 +24,37 @@
     
     <!-- Pop-up de Login -->
     <div id="loginPopup" class="popup">
-        <button class="close-btn" onclick="closePopup('loginPopup')">&#10006;</button>
+        <button class="close-btn" onclick="closePopup('loginPopup')" style="color: red; font-size: 20px;">&#10006;</button>
         <h2>Entrar na Conta</h2>
         <input type="text" placeholder="Nome de usuário" id="loginUser">
         <input type="password" placeholder="Senha" id="loginPass">
         <button onclick="login()">Entrar</button>
     </div>
     
+    <!-- Menu Lateral -->
+    <div id="menuPopup" class="popup">
+        <button class="close-btn" onclick="closePopup('menuPopup')" style="color: red; font-size: 20px;">&#10006;</button>
+        <h2>Menu</h2>
+        <p>Opção 1</p>
+        <p>Opção 2</p>
+        <p>Opção 3</p>
+    </div>
+    
     <!-- Produtos -->
     <div class="products">
-        <div class="product" onclick="openProduct('produto1')">
-            <img src="produto1.jpg" alt="Produto 1">
+        <div class="product" onclick="openProduct('produto1', 'Produto 1', 'https://via.placeholder.com/150', 'Descrição do Produto 1')">
+            <img src="https://via.placeholder.com/150" alt="Produto 1">
             <h3>Produto 1</h3>
         </div>
-        <div class="product" onclick="openProduct('produto2')">
-            <img src="produto2.jpg" alt="Produto 2">
+        <div class="product" onclick="openProduct('produto2', 'Produto 2', 'https://via.placeholder.com/150', 'Descrição do Produto 2')">
+            <img src="https://via.placeholder.com/150" alt="Produto 2">
             <h3>Produto 2</h3>
         </div>
     </div>
     
     <!-- Página de Detalhes do Produto -->
     <div id="productPage" class="popup" style="display:none;">
-        <button class="close-btn" onclick="closeProductPage()">&#10006;</button>
+        <button class="close-btn" onclick="closeProductPage()" style="color: red; font-size: 20px;">&#10006;</button>
         <h2 id="productTitle"></h2>
         <img id="productImage" src="" alt="">
         <p id="productDescription"></p>
