@@ -40,7 +40,8 @@ canvas#bg{position:fixed;inset:0;z-index:0;pointer-events:none;}
 .counter-wrap::before{content:'';position:absolute;inset:-1px;border-radius:16px;background:linear-gradient(135deg,var(--neon-cyan),var(--neon-pink),var(--neon-purple));z-index:-1;}
 .counter-box{background:var(--dark2);border-radius:15px;padding:28px 36px;display:inline-flex;gap:24px;flex-wrap:wrap;justify-content:center;}
 .c-unit{text-align:center;}
-.c-num{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-weight:700;color:var(--neon-cyan);display:block;text-shadow:0 0 20px var(--neon-cyan);min-width:2ch;}
+.c-num{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,5vw,3rem);font-weight:700;color:var(--neon-cyan);display:block;text-shadow:0 0 20px var(--neon-cyan);min-width:2ch;transition:transform .15s;}
+.c-num.bump{transform:scale(1.15);}
 .c-label{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:4px;display:block;}
 .sep{color:var(--neon-pink);align-self:center;font-size:1.5rem;opacity:.5;}
 .scroll-hint{font-size:.75rem;color:var(--muted);letter-spacing:.15em;animation:blink 1.5s ease-in-out infinite;}
@@ -52,6 +53,33 @@ section{padding:80px 24px;max-width:720px;margin:0 auto;}
 .sec-title{font-family:'Orbitron',monospace;font-size:clamp(1.3rem,3.5vw,2rem);font-weight:700;margin-bottom:36px;color:var(--text);}
 .divider{height:1px;background:linear-gradient(90deg,transparent,var(--neon-purple),transparent);margin:0 24px;opacity:.3;}
 
+/* AUDIO BTN */
+#audio-btn{
+  position:fixed;bottom:24px;right:24px;z-index:9997;
+  width:46px;height:46px;border-radius:50%;
+  background:rgba(13,13,26,.9);border:1px solid rgba(176,38,255,.4);
+  color:var(--neon-purple);font-size:1.2rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 14px rgba(176,38,255,.2);
+  transition:all .25s;backdrop-filter:blur(8px);
+}
+#audio-btn:hover{border-color:var(--neon-purple);box-shadow:0 0 24px rgba(176,38,255,.45);}
+#audio-btn.playing{border-color:var(--neon-pink);color:var(--neon-pink);box-shadow:0 0 20px rgba(255,45,120,.4);}
+.bars{display:none;align-items:flex-end;gap:2px;height:14px;}
+.bars span{display:block;width:3px;background:var(--neon-pink);border-radius:2px;animation:bar .6s ease-in-out infinite alternate;}
+.bars span:nth-child(1){animation-delay:0s;height:6px;}
+.bars span:nth-child(2){animation-delay:.1s;height:10px;}
+.bars span:nth-child(3){animation-delay:.2s;height:14px;}
+.bars span:nth-child(4){animation-delay:.1s;height:8px;}
+#audio-btn.playing .bars{display:flex;}
+#audio-btn.playing .audio-icon{display:none;}
+@keyframes bar{from{transform:scaleY(.4)}to{transform:scaleY(1)}}
+
+/* hidden player */
+#hidden-player{position:fixed;bottom:80px;right:24px;z-index:9996;width:280px;border-radius:12px;overflow:hidden;box-shadow:0 0 20px rgba(176,38,255,.3);display:none;}
+#hidden-player.open{display:block;}
+#hidden-player iframe{width:100%;border:none;display:block;}
+
 /* HISTORIA CARDS */
 .historia-cards{display:flex;flex-direction:column;gap:20px;}
 .hcard{background:rgba(255,255,255,.03);border-left:3px solid var(--neon-cyan);border-radius:0 12px 12px 0;padding:20px 24px;opacity:0;transform:translateX(-24px);transition:opacity .5s,transform .5s;}
@@ -60,6 +88,29 @@ section{padding:80px 24px;max-width:720px;margin:0 auto;}
 .hcard-title{font-family:'Orbitron',monospace;font-size:.85rem;color:var(--neon-cyan);margin-bottom:8px;text-shadow:0 0 8px var(--neon-cyan);}
 .hcard p{font-size:1rem;line-height:1.7;color:#b0acd0;font-family:'Klee One',cursive;}
 
+/* PLAYLIST */
+#playlist-sec{text-align:center;}
+.playlist-hint{font-size:.9rem;color:var(--muted);font-family:'Klee One',cursive;margin-bottom:28px;line-height:1.7;}
+.playlist-input-wrap{display:flex;gap:10px;max-width:500px;margin:0 auto 28px;}
+.playlist-input{
+  flex:1;background:rgba(255,255,255,.04);
+  border:1px solid rgba(0,245,255,.2);border-radius:8px;
+  padding:12px 16px;color:var(--text);
+  font-family:'Rajdhani',sans-serif;font-size:.95rem;
+  outline:none;transition:border-color .25s;
+}
+.playlist-input:focus{border-color:var(--neon-cyan);box-shadow:0 0 12px rgba(0,245,255,.12);}
+.playlist-input::placeholder{color:var(--muted);}
+.pl-btn{
+  background:linear-gradient(135deg,var(--neon-pink),var(--neon-purple));
+  border:none;border-radius:8px;padding:12px 20px;
+  color:#fff;font-family:'Orbitron',monospace;font-size:.7rem;
+  letter-spacing:.1em;cursor:pointer;transition:opacity .25s;white-space:nowrap;
+}
+.pl-btn:hover{opacity:.85;}
+#embed-area{min-height:80px;}
+#embed-area iframe{border-radius:12px;width:100%;border:none;}
+
 /* ANIME SECTION */
 #anime-sec{text-align:center;}
 .anime-hint{font-size:.9rem;color:var(--muted);font-family:'Klee One',cursive;margin-bottom:28px;line-height:1.7;}
@@ -67,16 +118,12 @@ section{padding:80px 24px;max-width:720px;margin:0 auto;}
 .char-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;}
 .char-name{font-family:'Orbitron',monospace;font-size:.65rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;}
 .char-badge{font-size:.7rem;letter-spacing:.1em;padding:3px 10px;border-radius:20px;margin-top:2px;}
-
-/* anime photo slot */
 .anime-photo-slot{width:110px;height:150px;border-radius:14px;border:2px dashed rgba(0,245,255,.3);background:rgba(0,245,255,.03);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;overflow:hidden;transition:border-color .3s,background .3s;}
 .anime-photo-slot:hover{border-color:var(--neon-cyan);background:rgba(0,245,255,.07);}
 .anime-photo-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:12px;}
 .anime-photo-slot input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
 .anime-photo-slot .aplus{font-size:2rem;color:rgba(0,245,255,.35);pointer-events:none;}
 .anime-photo-slot .aslot-label{font-size:.6rem;color:var(--muted);margin-top:4px;letter-spacing:.08em;pointer-events:none;text-align:center;}
-
-/* anime info cards */
 .anime-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
 .acard{background:rgba(255,255,255,.03);border:1px solid rgba(176,38,255,.2);border-radius:14px;padding:16px 12px;text-align:center;opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s;}
 .acard.visible{opacity:1;transform:translateY(0);}
@@ -104,6 +151,13 @@ section{padding:80px 24px;max-width:720px;margin:0 auto;}
 .photo-slot .plus{font-size:1.8rem;color:rgba(0,245,255,.4);pointer-events:none;}
 .photo-slot .slot-label{font-size:.65rem;color:var(--muted);margin-top:4px;letter-spacing:.1em;pointer-events:none;}
 
+/* LIGHTBOX */
+#lightbox{display:none;position:fixed;inset:0;z-index:9999;background:rgba(8,8,16,.93);align-items:center;justify-content:center;backdrop-filter:blur(8px);}
+#lightbox.open{display:flex;}
+#lightbox img{max-width:92vw;max-height:88vh;border-radius:14px;object-fit:contain;}
+#lightbox-close{position:absolute;top:20px;right:24px;background:none;border:none;color:var(--text);font-size:1.8rem;cursor:pointer;opacity:.6;}
+#lightbox-close:hover{opacity:1;}
+
 /* STATS */
 .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
 .stat-card{background:rgba(255,255,255,.03);border:1px solid rgba(176,38,255,.2);border-radius:14px;padding:22px;text-align:center;opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s;}
@@ -121,8 +175,9 @@ section{padding:80px 24px;max-width:720px;margin:0 auto;}
 .letter-sign{margin-top:20px;font-family:'Orbitron',monospace;font-size:.85rem;color:var(--neon-pink);text-align:right;text-shadow:0 0 8px var(--neon-pink);}
 
 /* FOOTER */
-footer{position:relative;z-index:2;text-align:center;padding:60px 24px 40px;color:var(--muted);font-size:.75rem;letter-spacing:.15em;}
+footer{position:relative;z-index:2;text-align:center;padding:60px 24px 44px;color:var(--muted);font-size:.75rem;letter-spacing:.15em;}
 .footer-names{font-family:'Orbitron',monospace;font-size:1.1rem;background:linear-gradient(90deg,var(--neon-cyan),var(--neon-pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;margin-bottom:12px;}
+.footer-sub{font-size:.65rem;color:var(--muted);letter-spacing:.1em;margin-top:8px;}
 .hfloat{position:fixed;font-size:1.1rem;pointer-events:none;z-index:1;animation:floatUp 7s linear forwards;}
 @keyframes floatUp{0%{transform:translateY(100vh);opacity:.9}100%{transform:translateY(-10vh);opacity:0}}
 
@@ -132,10 +187,28 @@ footer{position:relative;z-index:2;text-align:center;padding:60px 24px 40px;colo
   .anime-cards{grid-template-columns:1fr 1fr;}
   .anime-stage{gap:16px;}
   .anime-photo-slot{width:88px;height:120px;}
+  .playlist-input-wrap{flex-direction:column;}
+  .pl-btn{width:100%;}
 }
 </style>
 </head>
 <body>
+
+<!-- AUDIO BTN -->
+<button id="audio-btn" onclick="togglePlayer()" title="tocar música">
+  <span class="audio-icon">🎵</span>
+  <div class="bars"><span></span><span></span><span></span><span></span></div>
+</button>
+
+<!-- HIDDEN PLAYER -->
+<div id="hidden-player"></div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox()">
+  <button id="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
 <canvas id="bg"></canvas>
 <div class="page">
 
@@ -168,7 +241,7 @@ footer{position:relative;z-index:2;text-align:center;padding:60px 24px 40px;colo
 <div class="divider"></div>
 
 <!-- NOSSA HISTORIA -->
-<section>
+<section id="historia">
   <p class="sec-eye">// origem</p>
   <h2 class="sec-title">como tudo comecou</h2>
   <div class="historia-cards">
@@ -193,6 +266,20 @@ footer{position:relative;z-index:2;text-align:center;padding:60px 24px 40px;colo
       <p>voltamos a conversar la pro final do ano. e aqui estamos. eu e voce amor. valeu cada segundo dessa historia akakakaka</p>
     </div>
   </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PLAYLIST -->
+<section id="playlist-sec">
+  <p class="sec-eye">// vibe</p>
+  <h2 class="sec-title">nossa música</h2>
+  <p class="playlist-hint">cole um link do Spotify ou YouTube abaixo e ele aparece aqui 🎧<br>o ícone 🎵 no canto vai tocar ela a qualquer hora</p>
+  <div class="playlist-input-wrap">
+    <input class="playlist-input" id="music-url" type="text" placeholder="https://open.spotify.com/... ou youtube.com/...">
+    <button class="pl-btn" onclick="embedMusic()">salvar</button>
+  </div>
+  <div id="embed-area"></div>
 </section>
 
 <div class="divider"></div>
@@ -255,7 +342,7 @@ footer{position:relative;z-index:2;text-align:center;padding:60px 24px 40px;colo
 <div class="divider"></div>
 
 <!-- TIMELINE -->
-<section>
+<section id="timeline-sec">
   <p class="sec-eye">// log de eventos</p>
   <h2 class="sec-title">nossa linha do tempo</h2>
   <div class="timeline">
@@ -283,10 +370,10 @@ footer{position:relative;z-index:2;text-align:center;padding:60px 24px 40px;colo
 <div class="divider"></div>
 
 <!-- FOTOS -->
-<section>
+<section id="fotos-sec">
   <p class="sec-eye">// galeria</p>
   <h2 class="sec-title">nossas fotos</h2>
-  <p class="photo-intro">clica em cada quadrado pra adicionar uma foto nossa 📸<br>fica salvo so no seu navegador</p>
+  <p class="photo-intro">clica em cada quadrado pra adicionar uma foto nossa 📸<br>fica salvo so no seu navegador · clica na foto pra ampliar</p>
   <div class="photo-grid" id="photo-grid"></div>
 </section>
 
@@ -330,7 +417,7 @@ footer{position:relative;z-index:2;text-align:center;padding:60px 24px 40px;colo
 </footer>
 
 <script>
-// BG
+/* ---- BG ---- */
 const canvas=document.getElementById('bg'),ctx=canvas.getContext('2d');
 let W,H,P=[];
 function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
@@ -339,38 +426,101 @@ function drawBg(){ctx.clearRect(0,0,W,H);P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.
 resize();initP();drawBg();
 window.addEventListener('resize',()=>{resize();initP();});
 
-// COUNTER
+/* ---- COUNTER ---- */
 const startDate=new Date('2026-04-20T00:00:00'),kissDate=new Date('2026-03-08T00:00:00');
+let prevSec=-1;
 function updateCounter(){
   const now=new Date(),diff=now-startDate;
+  const s=Math.floor(diff%60000/1000);
   document.getElementById('cnt-days').textContent=Math.floor(diff/86400000);
   document.getElementById('cnt-hours').textContent=String(Math.floor(diff%86400000/3600000)).padStart(2,'0');
   document.getElementById('cnt-mins').textContent=String(Math.floor(diff%3600000/60000)).padStart(2,'0');
-  document.getElementById('cnt-secs').textContent=String(Math.floor(diff%60000/1000)).padStart(2,'0');
+  const sEl=document.getElementById('cnt-secs');
+  sEl.textContent=String(s).padStart(2,'0');
+  if(s!==prevSec){sEl.classList.add('bump');setTimeout(()=>sEl.classList.remove('bump'),150);}
+  prevSec=s;
   document.getElementById('stat-days').textContent=Math.floor(diff/86400000);
   document.getElementById('stat-kiss').textContent=Math.floor((now-kissDate)/86400000);
 }
 updateCounter();setInterval(updateCounter,1000);
 
-// ANIME PHOTOS
+/* ---- MUSIC PLAYER ---- */
+// O botão 🎵 mostra/esconde o player com a música salva no localStorage
+let playerOpen=false;
+
+function buildEmbedHtml(raw){
+  if(!raw)return'';
+  if(raw.includes('spotify.com')){
+    const url=raw.replace('https://open.spotify.com/','https://open.spotify.com/embed/').replace(/\?.*$/,'');
+    return`<iframe src="${url}" height="152" allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture"></iframe>`;
+  }
+  if(raw.includes('youtube.com/watch')){
+    try{const id=new URL(raw).searchParams.get('v');if(id)return`<iframe width="100%" height="160" src="https://www.youtube.com/embed/${id}?autoplay=1" allow="autoplay;encrypted-media" allowfullscreen></iframe>`;}catch(e){}
+  }
+  if(raw.includes('youtu.be/')){
+    const id=raw.split('youtu.be/')[1].split('?')[0];
+    if(id)return`<iframe width="100%" height="160" src="https://www.youtube.com/embed/${id}?autoplay=1" allow="autoplay;encrypted-media" allowfullscreen></iframe>`;
+  }
+  return'';
+}
+
+function togglePlayer(){
+  const btn=document.getElementById('audio-btn');
+  const hp=document.getElementById('hidden-player');
+  const saved=localStorage.getItem('gv-music')||'';
+  if(!saved){
+    // sem música salva: rola até a seção de música
+    document.getElementById('playlist-sec').scrollIntoView({behavior:'smooth'});
+    return;
+  }
+  playerOpen=!playerOpen;
+  if(playerOpen){
+    hp.innerHTML=buildEmbedHtml(saved);
+    hp.classList.add('open');
+    btn.classList.add('playing');
+  }else{
+    hp.innerHTML='';
+    hp.classList.remove('open');
+    btn.classList.remove('playing');
+  }
+}
+
+/* ---- MUSIC EMBED (seção de música na página) ---- */
+function embedMusic(){
+  const raw=document.getElementById('music-url').value.trim();
+  const area=document.getElementById('embed-area');
+  area.innerHTML='';
+  if(!raw){area.innerHTML='<p style="color:var(--muted);font-size:.9rem;font-family:Klee One,cursive">cole um link valido</p>';return;}
+  const html=buildEmbedHtml(raw);
+  if(html){
+    area.innerHTML=html;
+    try{localStorage.setItem('gv-music',raw);}catch(e){}
+    // atualiza hidden player se estiver aberto
+    const hp=document.getElementById('hidden-player');
+    if(playerOpen){hp.innerHTML=buildEmbedHtml(raw);}
+  }else{
+    area.innerHTML='<p style="color:var(--muted);font-size:.9rem;font-family:Klee One,cursive">link nao reconhecido. usa spotify ou youtube</p>';
+  }
+}
+// restaura música salva na seção
+try{const s=localStorage.getItem('gv-music');if(s){document.getElementById('music-url').value=s;const h=buildEmbedHtml(s);if(h)document.getElementById('embed-area').innerHTML=h;}}catch(e){}
+
+/* ---- ANIME PHOTOS ---- */
 let animePhotos={};
 try{animePhotos=JSON.parse(localStorage.getItem('gv-anime')||'{}');}catch(e){}
 function saveAnime(){try{localStorage.setItem('gv-anime',JSON.stringify(animePhotos));}catch(e){}}
 function loadAnimePhoto(i,input){
   const f=input.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=ev=>{animePhotos[i]=ev.target.result;saveAnime();renderAnime(i);};
-  r.readAsDataURL(f);
+  const r=new FileReader();r.onload=ev=>{animePhotos[i]=ev.target.result;saveAnime();renderAnime(i);};r.readAsDataURL(f);
 }
 function renderAnime(i){
   const slot=document.getElementById('aslot-'+i);
-  let img=slot.querySelector('img');
-  if(!img){img=document.createElement('img');slot.appendChild(img);}
+  let img=slot.querySelector('img');if(!img){img=document.createElement('img');slot.appendChild(img);}
   img.src=animePhotos[i];
 }
 [0,1,2].forEach(i=>{if(animePhotos[i])renderAnime(i);});
 
-// PHOTO GRID
+/* ---- PHOTO GRID + LIGHTBOX ---- */
 const SLOTS=6,photoGrid=document.getElementById('photo-grid');
 let photos={};
 try{photos=JSON.parse(localStorage.getItem('gv-photos')||'{}');}catch(e){}
@@ -381,21 +531,31 @@ for(let i=0;i<SLOTS;i++){
   const label=document.createElement('span');label.className='slot-label';label.textContent='adicionar foto';
   const input=document.createElement('input');input.type='file';input.accept='image/*';
   input.addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{photos[i]=ev.target.result;savePhotos();renderSlot(i);};r.readAsDataURL(f);});
-  slot.appendChild(plus);slot.appendChild(label);slot.appendChild(input);
-  photoGrid.appendChild(slot);
+  slot.appendChild(plus);slot.appendChild(label);slot.appendChild(input);photoGrid.appendChild(slot);
   if(photos[i])renderSlot(i);
 }
-function renderSlot(i){const slot=document.getElementById('slot-'+i);let img=slot.querySelector('img');if(!img){img=document.createElement('img');slot.appendChild(img);}img.src=photos[i];}
+function renderSlot(i){
+  const slot=document.getElementById('slot-'+i);
+  let img=slot.querySelector('img');
+  if(!img){img=document.createElement('img');slot.appendChild(img);img.addEventListener('click',e=>{e.stopPropagation();openLightbox(photos[i]);});}
+  img.src=photos[i];
+}
+function openLightbox(src){document.getElementById('lightbox-img').src=src;document.getElementById('lightbox').classList.add('open');}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');}
 
-// SCROLL REVEAL
+/* ---- SCROLL REVEAL ---- */
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.12});
 document.querySelectorAll('.tl-item,.stat-card,.hcard,.acard').forEach(el=>obs.observe(el));
 
-// LETTER
-function toggleLetter(){const box=document.getElementById('letter-box'),btn=document.querySelector('.letter-btn');box.classList.toggle('open');btn.textContent=box.classList.contains('open')?'💌 FECHAR A CARTA':'💌 ABRIR A CARTA';}
+/* ---- LETTER ---- */
+function toggleLetter(){
+  const box=document.getElementById('letter-box'),btn=document.querySelector('.letter-btn');
+  box.classList.toggle('open');
+  btn.textContent=box.classList.contains('open')?'💌 FECHAR A CARTA':'💌 ABRIR A CARTA';
+}
 
-// HEARTS
-const emojis=['💕','💗','💖','✨','🌸','💝','👾','⭐'];
+/* ---- FLOATING HEARTS ---- */
+const emojis=['💕','💗','💖','✨','🌸','💝','👾','⭐','❤️'];
 function spawnHeart(){const h=document.createElement('div');h.className='hfloat';h.textContent=emojis[Math.floor(Math.random()*emojis.length)];h.style.left=Math.random()*100+'vw';h.style.animationDuration=(5+Math.random()*4)+'s';document.body.appendChild(h);setTimeout(()=>h.remove(),9000);}
 setInterval(spawnHeart,2000);
 </script>
